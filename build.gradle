@@ -1,16 +1,16 @@
 plugins {
-    id 'java'
-    id 'org.jetbrains.kotlin.jvm' version '1.2.51'
+    id "java"
+    id "org.jetbrains.kotlin.jvm" version "1.2.51"
 }
 
-group 'com.nenaner.katas'
-version '1.0-SNAPSHOT'
+group "com.nenaner.katas"
+version "1.0-SNAPSHOT"
 
 sourceCompatibility = 1.8
 
 repositories {
     maven {
-        url 'https://dl.bintray.com/spekframework/spek-dev'
+        url "https://dl.bintray.com/spekframework/spek-dev"
     }
     mavenCentral()
     jcenter()
@@ -18,24 +18,26 @@ repositories {
 
 dependencies {
     compile "org.jetbrains.kotlin:kotlin-stdlib-jdk8:1.2.60"
+    compile "org.slf4j:slf4j-api:1.7.25"
+    compile "io.github.microutils:kotlin-logging:1.6.10"
 
     // JUnit 5
-    testCompile('org.junit.jupiter:junit-jupiter-api:5.2.0')
-    testRuntime('org.junit.jupiter:junit-jupiter-engine:5.2.0')
+    testCompile("org.junit.jupiter:junit-jupiter-api:5.2.0")
+    testRuntime("org.junit.jupiter:junit-jupiter-engine:5.2.0")
 
     // Kotlintest
-    testCompile 'io.kotlintest:kotlintest-core:3.1.8'
-    testCompile 'io.kotlintest:kotlintest-assertions:3.1.8'
-    testCompile 'io.kotlintest:kotlintest-runner-junit5:3.1.8'
+    testCompile "io.kotlintest:kotlintest-core:3.1.8"
+    testCompile "io.kotlintest:kotlintest-assertions:3.1.8"
+    testCompile "io.kotlintest:kotlintest-runner-junit5:3.1.8"
 
     // Spek
     testCompile "org.jetbrains.kotlin:kotlin-reflect:1.2.60"
-    testCompile('org.jetbrains.spek:spek-api:1.1.5') {
-        exclude group: 'org.jetbrains.kotlin'
+    testCompile("org.jetbrains.spek:spek-api:1.1.5") {
+        exclude group: "org.jetbrains.kotlin"
     }
-    testRuntime('org.jetbrains.spek:spek-junit-platform-engine:1.1.5') {
-        exclude group: 'org.junit.platform'
-        exclude group: 'org.jetbrains.kotlin'
+    testRuntime("org.jetbrains.spek:spek-junit-platform-engine:1.1.5") {
+        exclude group: "org.junit.platform"
+        exclude group: "org.jetbrains.kotlin"
     }
 
     testCompile "com.nhaarman:mockito-kotlin:1.6.0"
@@ -44,11 +46,11 @@ dependencies {
 test {
     // Enable JUnit 5 (Gradle 4.6+).
     useJUnitPlatform {
-        includeEngines 'spek'
+        includeEngines "spek"
     }
 
     // Always run tests, even when nothing changed.
-    dependsOn 'cleanTest'
+    dependsOn "cleanTest"
 
     // Show test results.
     testLogging {

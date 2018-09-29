@@ -12,8 +12,8 @@ import org.junit.jupiter.api.Assertions.assertThrows
 
 object BankOcrControllerTests : Spek({
     given("a bank OCR Controller") {
-        val imageList = mutableListOf<String>()
-        imageMap.forEach { image, _ -> imageList.add(imageList.size, image) }
+        val imageList = mutableMapOf<Int, Array<String>>()
+        imageMap.forEach { (key, value) -> imageList[value] = key }
         val mockFaxReader = mock<FaxControllerInterface>()
         val bankOcrController = BankOcrController(mockFaxReader)
         on("scanning an image with a single character from the page") {
@@ -28,7 +28,7 @@ object BankOcrControllerTests : Spek({
             }
         }
         on("scanning an image with an invalid character on the page (\"\")") {
-            whenever(mockFaxReader.readNextCharacter()).thenReturn("foo").thenReturn(null)
+            whenever(mockFaxReader.readNextCharacter()).thenReturn(arrayOf("foo")).thenReturn(null)
             val exception = assertThrows(NumberFormatException::class.java) {
                 bankOcrController.scan()
             }
